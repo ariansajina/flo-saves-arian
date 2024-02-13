@@ -1,6 +1,6 @@
+from flo.base import GameObject
 from flo.constants.physics import Direction
 from flo.mechanics import CanExitScreen, CanMoveHorizontally
-from flo.objects import GameObject
 
 
 class Flower(

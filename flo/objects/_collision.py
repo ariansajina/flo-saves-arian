@@ -5,8 +5,8 @@ from pygame import Rect
 from flo.base import GameObject
 from flo.constants.settings import floor_pad, table_height
 from flo.mechanics import CanCollide
-from flo.objects import Obstacle, ObstacleToStandOn
-from flo.objects._trombone import Trombone
+
+from ._trivial import Obstacle, ObstacleToStandOn
 
 
 class CannotGoThroughObstacles(CanCollide, ABC):

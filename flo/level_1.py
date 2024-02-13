@@ -11,7 +11,7 @@ from flo.objects import Flo, Obstacle, ObstacleToStandOn, Scenery
 
 images = Path(__file__).parent.parent / "images"
 
-DEVELOPMENT = True
+DEVELOPMENT = False
 
 # Initialize pygame
 pygame.init()
@@ -117,7 +117,6 @@ all_sprites.add(
         bottle,
         bottle_mask_1,
         bottle_mask_2,
-        trombone_placeholder,
         pineapple,
     ],
     layer=1,

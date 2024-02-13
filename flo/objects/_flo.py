@@ -4,6 +4,7 @@ from flo.mechanics import CanJump, CanMoveHorizontally, CannotExitScreen
 
 from ._collision import CannotGoThroughObstacles
 from ._flower import Flower
+from ._trivial import ObstacleToStandOn
 
 
 class Flo(
@@ -33,4 +34,11 @@ class Flo(
             x + (self.rect.width if self.direction is Direction.right else 0),
             y + (self.rect.height // 2),
             self.direction,
+        )
+
+    def is_standing_on(self, obj: GameObject) -> bool:
+        return (
+            isinstance(obj, ObstacleToStandOn)
+            and self.rect.colliderect(obj.rect)
+            and self.rect.bottom <= obj.rect.top + self.y_velocity
         )
