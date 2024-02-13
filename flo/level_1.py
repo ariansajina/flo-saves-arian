@@ -70,10 +70,17 @@ bottle_mask_2 = ObstacleToStandOn(
     "mask-90x1.png", 560, screen_height - 45 - table_height + floor_pad
 )
 
+coat_hanger = Scenery("coat_hanger.png", 850, 395)
+coat_hanger_mask = ObstacleToStandOn("mask-260x1.png", 860, 405)
+
+shelf = Scenery("shelf.png", 1000, 283)
+shelf_mask = ObstacleToStandOn("mask-230x1.png", 1005, 290)
+
 pineapple_image = pygame.image.load(images / "pineapple.png").convert_alpha()
 pineapple = Scenery(
-    "pineapple.png", 1060, screen_height - pineapple_image.get_height() - 488
+    "pineapple.png", 1060, screen_height - pineapple_image.get_height() - 498
 )
+pineapple_mask = ObstacleToStandOn("mask-70x80.png", 1080, 210)
 
 
 font = pygame.font.Font(None, 36)
@@ -117,7 +124,12 @@ all_sprites.add(
         bottle,
         bottle_mask_1,
         bottle_mask_2,
+        coat_hanger,
+        coat_hanger_mask,
+        shelf,
+        shelf_mask,
         pineapple,
+        pineapple_mask,
     ],
     layer=1,
 )
@@ -125,7 +137,7 @@ all_sprites.add(flo, layer=2)
 all_sprites.add(foreground_sprites, layer=3)
 
 
-# start_image = pygame.image.load(images / "pineapple.png").convert_alpha()
+start_image = pygame.image.load(images / "tiramisu.jpg").convert_alpha()
 
 
 # def show_start_image():
