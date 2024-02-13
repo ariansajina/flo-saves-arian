@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Optional, Self, Collection, TypeAlias
+from typing import Collection, Optional, Self, TypeAlias
 
 import pygame
 from pygame import Rect
@@ -52,7 +52,7 @@ class Universe:
         perished_atoms = []
         for atom in snapshot:
             other_atoms = snapshot.difference([atom] + perished_atoms)
-            atom.tick(other_atoms)
+            atom.update(other_atoms)
             if atom.is_perished:
                 perished_atoms.append(atom)
                 self.remove(atom)

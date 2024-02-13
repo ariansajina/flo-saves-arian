@@ -1,14 +1,10 @@
+from flo.base import GameObjectWithDirection
 from flo.constants.physics import Direction
 from flo.graphics import enemy_image
-from flo.mechanics import (
-    CanMoveHorizontally,
-    CannotExitScreen,
-    CanCollide,
-)
-from flo.universe import GameAtom, Environment
-from . import ObstacleToStandOn
+from flo.mechanics import CanCollide, CanMoveHorizontally, CannotExitScreen
+from flo.universe import Environment, GameAtom
 
-from .base import GameObjectWithDirection
+from . import ObstacleToStandOn
 from ._flower import Flower
 
 
@@ -36,7 +32,7 @@ class Enemy(
         self.collisions(environment)
         self.bound()
 
-    def _collision_with_atom(self, game_atom: GameAtom):
+    def _collision_with_object(self, game_atom: GameAtom):
         match game_atom:
             case ObstacleToStandOn() as obstacle:
                 self._collision_with_obstacle(obstacle)

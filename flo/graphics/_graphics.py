@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pygame
 
-images = Path(__file__).parent.parent.parent / "katica_drawings"
+images = Path(__file__).parent.parent.parent / "images"
 
 flo_image = pygame.image.load(images / "floV1.png")
 flo_width = flo_image.get_width()

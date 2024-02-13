@@ -1,13 +1,19 @@
 from abc import ABC, abstractmethod
 
-from flo.universe import GameAtom
+from flo.base import GameObject
 from flo.constants.settings import screen_height, screen_width
 
 
-class CannotExitScreen(GameAtom, ABC):
+class Bound(GameObject, ABC):
+    @abstractmethod
+    def bound(self) -> None:
+        raise NotImplementedError()
+
+
+class CannotExitScreen(Bound, ABC):
     """Cannot leave the boundaries of the screen."""
 
-    def bound(self) -> bool:
+    def bound(self) -> None:
         if self.rect.right > screen_width:
             self.rect.right = screen_width
         if self.rect.top > screen_height - self.rect.height:
@@ -16,18 +22,16 @@ class CannotExitScreen(GameAtom, ABC):
             self.rect.right = self.rect.width
         if self.rect.top < 0:
             self.rect.top = screen_height - self.rect.height
-        return False
 
 
-class CanExitScreen(GameAtom, ABC):
+class CanExitScreen(Bound, ABC):
     """Can leave the boundaries of the screen."""
 
-    def bound(self) -> bool:
+    def bound(self) -> None:
         if (
             self.rect.right > screen_width
             or self.rect.top > screen_height - self.rect.height
             or self.rect.right < self.rect.width
             or self.rect.top < 0
         ):
-            return True
-        return False
+            self.kill()

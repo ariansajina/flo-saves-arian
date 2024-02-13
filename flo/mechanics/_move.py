@@ -1,14 +1,9 @@
 from abc import ABC, abstractmethod
 
-from flo.universe import GameAtom
+from flo.base import GameObject
 
 
-class CanMoveHorizontally(GameAtom, ABC):
-
-    def __init__(self):
-        super().__init__()
-        self._animation_counter = 0
-
+class CanMoveHorizontally(GameObject, ABC):
     @property
     @abstractmethod
     def speed(self) -> int:
@@ -16,8 +11,6 @@ class CanMoveHorizontally(GameAtom, ABC):
 
     def move_left(self):
         self.rect.right -= self.speed
-        self._animation_counter += 1
 
     def move_right(self):
         self.rect.right += self.speed
-        self._animation_counter += 1

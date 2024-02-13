@@ -1,15 +1,20 @@
 from abc import ABC, abstractmethod
 
-from flo.universe import GameAtom, Environment
+from flo.base import GameObject
 
 
-class CanCollide(GameAtom, ABC):
+class CanCollide(GameObject, ABC):
 
-    def collisions(self, environment: Environment) -> None:
-        for game_atom in environment:
-            if self.rect.colliderect(game_atom):
-                self._collision_with_atom(game_atom)
+    def __init__(self, image: str, x: int, y: int):
+        super().__init__(image, x, y)
+        self._is_on_ground = True
+        self.y_velocity = 0
+
+    def collisions(self, environment: list[GameObject]) -> None:
+        for obj in environment:
+            if self.rect.colliderect(obj.rect):
+                self._collision_with_object(obj)
 
     @abstractmethod
-    def _collision_with_atom(self, game_atom: GameAtom):
+    def _collision_with_object(self, obj: GameObject):
         raise NotImplementedError()
