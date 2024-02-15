@@ -22,3 +22,10 @@ class Level1(LevelBase):
 
     def enemy_action(self):
         return
+
+    def get_instructions_and_xy(self):
+        return (
+            "use the arrow keys to move and jump",
+            220,
+            500,
+        )

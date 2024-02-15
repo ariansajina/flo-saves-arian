@@ -56,7 +56,7 @@ class Arian(GameObjectWithDirection, CanMoveHorizontally):
 
     @property
     def speed(self) -> int:
-        return 3
+        return 4
 
     def update(self, environment: list[Self]):
         return

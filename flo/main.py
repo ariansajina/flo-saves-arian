@@ -178,27 +178,27 @@ level_2 = Level2(level_2_sprites, screen, 100, 900)
 
 # region: order of game elements
 
-show_static_image(tiramisu, screen)
+# show_static_image(tiramisu, screen)
 
 level_1.run()
 
 show_static_image(senor_p, screen)
 
 level_2.run()
-
-animation_1 = AnimationEvilSmokeDies(level_2_sprites, screen, level_2.enemy)
-animation_1.run()
-
-animation_2 = AnimationFloComesDown(level_2_sprites, screen, level_2.flo)
-animation_2.run()
-
-
-animation_3 = AnimationArianComesIn(level_2_sprites, screen, level_2.flo)
-animation_3.run()
-
-time.sleep(1)
-
-show_static_image(yay, screen, is_last=True)
+#
+# animation_1 = AnimationEvilSmokeDies(level_2_sprites, screen, level_2.enemy)
+# animation_1.run()
+#
+# animation_2 = AnimationFloComesDown(level_2_sprites, screen, level_2.flo)
+# animation_2.run()
+#
+#
+# animation_3 = AnimationArianComesIn(level_2_sprites, screen, level_2.flo)
+# animation_3.run()
+#
+# time.sleep(1)
+#
+# show_static_image(yay, screen, is_last=True)
 
 # endregion
 

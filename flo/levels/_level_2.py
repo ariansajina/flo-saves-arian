@@ -4,6 +4,7 @@ from pygame import Surface
 
 from flo.constants.settings import player_layer
 from flo.objects import Enemy
+
 from ._base import LayeredUpdates, LevelBase
 
 
@@ -26,3 +27,10 @@ class Level2(LevelBase):
         if random.uniform(0, 1) < self.enemy.chance_of_shooting_smoke:
             smoke = self.enemy.shoot_smoke()
             self.sprites.add(smoke, layer=player_layer)
+
+    def get_instructions_and_xy(self):
+        return (
+            "press space to shoot flowers",
+            400,
+            300,
+        )
