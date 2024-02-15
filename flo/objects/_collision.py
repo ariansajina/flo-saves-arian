@@ -5,8 +5,8 @@ from pygame import Rect
 from flo.base import GameObject
 from flo.mechanics import CanCollide
 
-from ._trivial import Obstacle, ObstacleToStandOn, ObstacleRight
 from ..constants.physics import Direction
+from ._trivial import Obstacle, ObstacleRight, ObstacleToStandOn
 
 
 class CannotGoThroughObstacles(CanCollide, ABC):
@@ -21,7 +21,9 @@ class CannotGoThroughObstacles(CanCollide, ABC):
             case _:
                 pass
 
-    def _horizontal_collision_with_obstacle(self, obstacle: Obstacle, left=True, right=True):
+    def _horizontal_collision_with_obstacle(
+        self, obstacle: Obstacle, left=True, right=True
+    ):
         # Determine the center point of the entity and the obstacle
         entity_center = self.rect.center
         obstacle_center = obstacle.rect.center

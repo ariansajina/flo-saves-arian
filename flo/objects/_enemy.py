@@ -2,10 +2,9 @@ import math
 
 import pygame
 
-from flo.base import GameObjectWithDirection, GameObject
+from flo.base import GameObject
 from flo.mechanics import CanCollide, CanMoveHorizontally, CannotExitScreen
 
-from ._trivial import ObstacleToStandOn
 from ._flower import Flower
 
 
@@ -40,7 +39,7 @@ class Enemy(
             if self.hurt_timer <= 0:
                 self.is_hurt = False
                 self.rect.x = self._x_prior_hurt
-                self. rect.y = self._y_prior_hurt
+                self.rect.y = self._y_prior_hurt
 
     def _collision_with_object(self, obj: GameObject):
         match obj:

@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 
 from flo.base import GameObject
 from flo.constants.physics import GRAVITY, JUMP_HEIGHT
-from flo.constants.settings import floor_pad, screen_height, table_height
 
 
 class CanJump(GameObject, ABC):
@@ -32,14 +31,17 @@ class CanJump(GameObject, ABC):
                 self._stand()
 
         # Check for reaching the bottom of the screen
-        # TODO table_height should be refactored into something that works for both levels
-        floor = screen_height - self.rect.height - table_height + floor_pad
-        if self.rect.top >= floor:
-            self.rect.top = floor
+        if self.rect.top >= self.floor:
+            self.rect.top = self.floor
             self._stand()
 
     @abstractmethod
     def is_standing_on(self, obj: GameObject) -> bool:
+        raise NotImplementedError()
+
+    @property
+    @abstractmethod
+    def floor(self) -> int:
         raise NotImplementedError()
 
     def _stand(self) -> None:

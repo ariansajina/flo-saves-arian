@@ -1,10 +1,10 @@
-from abc import abstractmethod, ABC
+from abc import ABC, abstractmethod
 
 import pygame
 from pygame import Surface
 
-from flo.constants.settings import player_layer, fps
-from flo.objects import Flo, Obstacle, ObstacleToStandOn, ObstacleRight
+from flo.constants.settings import fps, player_layer
+from flo.objects import Flo, Obstacle, ObstacleRight, ObstacleToStandOn
 
 
 class LayeredUpdates(pygame.sprite.LayeredUpdates):
@@ -19,12 +19,12 @@ class LevelBase(ABC):
     _is_development = True
 
     def __init__(
-        self, sprites: LayeredUpdates, screen: Surface, flo_x: int, flo_y: int
+        self, sprites: LayeredUpdates, screen: Surface, flo_x: int, flo_y: int, floor: int
     ):
         self.sprites = sprites
         self._screen = screen
 
-        self.flo = Flo(flo_x, flo_y)
+        self.flo = Flo(flo_x, flo_y, floor)
         self.sprites.add(self.flo, layer=player_layer)
         self._clock = pygame.time.Clock()
 

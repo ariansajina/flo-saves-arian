@@ -1,4 +1,4 @@
-from flo.base import GameObject, GameObjectWithDirection
+from flo.base import GameObject
 from flo.constants.physics import Direction
 from flo.mechanics import CanJump, CanMoveHorizontally, CannotExitScreen
 
@@ -15,13 +15,18 @@ class Flo(
 ):
     _gait_speed = 5
 
-    def __init__(self, x: int, y: int):
+    def __init__(self, x: int, y: int, floor: int):
         super().__init__("flo.png", x, y)
+        self._floor = floor
 
     def update(self, environment: list[GameObject]) -> None:
         self.collisions(environment)
         self.fall(environment)
         self.bound()
+
+    @property
+    def floor(self) -> int:
+        return self._floor
 
     @property
     def speed(self) -> int:

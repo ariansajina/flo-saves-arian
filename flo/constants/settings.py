@@ -10,4 +10,3 @@ player_layer = 2
 foreground_layer = 3
 
 fps = 60
-

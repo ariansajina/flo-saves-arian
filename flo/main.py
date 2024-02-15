@@ -3,18 +3,13 @@ from pathlib import Path
 
 import pygame
 
-from flo.constants.settings import (
-    floor_pad,
-    screen_height,
-    screen_width,
-    table_height,
-    foreground_layer,
-    object_layer,
-    background_layer,
-    player_layer,
-)
+from flo.constants.settings import (background_layer, floor_pad,
+                                    foreground_layer, object_layer,
+                                    player_layer, screen_height, screen_width,
+                                    table_height)
 from flo.levels import LayeredUpdates, Level1, Level2, show_static_image
-from flo.objects import Obstacle, ObstacleToStandOn, Scenery, Enemy, ObstacleRight
+from flo.objects import (Enemy, Obstacle, ObstacleRight, ObstacleToStandOn,
+                         Scenery)
 
 images = Path(__file__).parent.parent / "images"
 
@@ -46,8 +41,8 @@ chair = Scenery(
     "chair.png", 550, screen_height - chair_img.get_height() - table_height + floor_pad
 )
 chair_mask_1 = ObstacleToStandOn(
-    "masks/mask-25x1.png",
-    552,
+    "masks/mask-15x1.png",
+    560,
     screen_height - chair_img.get_height() - table_height + floor_pad + 5,
 )
 chair_mask_2 = ObstacleToStandOn(
@@ -56,8 +51,8 @@ chair_mask_2 = ObstacleToStandOn(
     screen_height - chair_img.get_height() - table_height + floor_pad + 35,
 )
 chair_mask_3 = ObstacleToStandOn(
-    "masks/mask-25x1.png",
-    823,
+    "masks/mask-15x1.png",
+    827,
     screen_height - chair_img.get_height() - table_height + floor_pad + 5,
 )
 chair_mask_4 = ObstacleRight(
@@ -68,7 +63,7 @@ chair_mask_4 = ObstacleRight(
 chair_mask_5 = Obstacle(
     "masks/mask-1x5.png",
     825,
-    510,
+    514,
 )
 
 
@@ -79,17 +74,17 @@ bottle = Scenery(
     screen_height - bottle_img.get_height() - table_height + floor_pad,
 )
 bottle_mask_1 = ObstacleToStandOn(
-    "masks/mask-230x1.png", 310, screen_height - 100 - table_height + floor_pad
+    "masks/mask-230x1.png", 310, screen_height - 90 - table_height + floor_pad
 )
 bottle_mask_2 = ObstacleToStandOn(
     "masks/mask-90x1.png", 560, screen_height - 45 - table_height + floor_pad
 )
 
 coat_hanger = Scenery("coat_hanger.png", 850, 395)
-coat_hanger_mask = ObstacleToStandOn("masks/mask-260x1.png", 860, 405)
+coat_hanger_mask = ObstacleToStandOn("masks/mask-260x1.png", 860, 410)
 
 shelf = Scenery("shelf.png", 1000, 283)
-shelf_mask = ObstacleToStandOn("masks/mask-230x1.png", 1005, 290)
+shelf_mask = ObstacleToStandOn("masks/mask-230x1.png", 1005, 295)
 
 pineapple_image = pygame.image.load(images / "pineapple.png").convert_alpha()
 pineapple = Scenery(
