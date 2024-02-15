@@ -1,4 +1,6 @@
-from flo.base import GameObject
+from typing import Self
+
+from flo.base import GameObject, GameObjectWithDirection
 from flo.constants.physics import Direction
 from flo.mechanics import CanJump, CanMoveHorizontally, CannotExitScreen
 
@@ -46,3 +48,15 @@ class Flo(
             and self.rect.colliderect(obj.rect)
             and self.rect.bottom <= obj.rect.top + self.y_velocity
         )
+
+
+class Arian(GameObjectWithDirection, CanMoveHorizontally):
+    def __init__(self, x: int, y: int):
+        super().__init__("arian.png", x, y)
+
+    @property
+    def speed(self) -> int:
+        return 3
+
+    def update(self, environment: list[Self]):
+        return

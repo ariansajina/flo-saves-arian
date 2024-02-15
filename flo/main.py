@@ -1,15 +1,30 @@
 import sys
+import time
 from pathlib import Path
 
 import pygame
 
-from flo.constants.settings import (background_layer, floor_pad,
-                                    foreground_layer, object_layer,
-                                    player_layer, screen_height, screen_width,
-                                    table_height)
+from flo.constants.settings import (
+    background_layer,
+    floor_pad,
+    foreground_layer,
+    object_layer,
+    screen_height,
+    screen_width,
+    table_height,
+)
 from flo.levels import LayeredUpdates, Level1, Level2, show_static_image
-from flo.objects import (Enemy, Obstacle, ObstacleRight, ObstacleToStandOn,
-                         Scenery)
+from flo.levels._animation import (
+    AnimationEvilSmokeDies,
+    AnimationFloComesDown,
+    AnimationArianComesIn,
+)
+from flo.objects import (
+    Obstacle,
+    ObstacleRight,
+    ObstacleToStandOn,
+    Scenery,
+)
 
 images = Path(__file__).parent.parent / "images"
 
@@ -137,8 +152,6 @@ line_5 = ObstacleToStandOn("masks/mask-90x1.png", 620, 630)
 line_6 = ObstacleToStandOn("masks/mask-25x1.png", 710, 640)
 line_7 = ObstacleToStandOn("masks/mask-70x1.png", 614, 518)
 
-enemy = Enemy(950, 600)
-
 level_2_sprites = LayeredUpdates()
 
 level_2_sprites.add(background_2, layer=background_layer)
@@ -156,7 +169,6 @@ level_2_sprites.add(
     ],
     layer=object_layer,
 )
-level_2_sprites.add(enemy, layer=player_layer)
 # level_2_sprites.add(foreground_2, layer=foreground_layer)
 
 # endregion
@@ -175,19 +187,31 @@ level_1 = Level1(
     pineapple_mask,
 )
 
-level_2 = Level2(level_2_sprites, screen, 100, 900, enemy)
+level_2 = Level2(level_2_sprites, screen, 100, 900)
 
 # region: order of game elements
 
-# show_static_image(tiramisu, screen)
+show_static_image(tiramisu, screen)
 
 level_1.run()
 
-# show_static_image(senor_p, screen)
+show_static_image(senor_p, screen)
 
-# level_2.run()
+level_2.run()
 
-# show_static_image(yay, screen, is_last=True)
+animation_1 = AnimationEvilSmokeDies(level_2_sprites, screen, level_2.enemy)
+animation_1.run()
+
+animation_2 = AnimationFloComesDown(level_2_sprites, screen, level_2.flo)
+animation_2.run()
+
+
+animation_3 = AnimationArianComesIn(level_2_sprites, screen, level_2.flo)
+animation_3.run()
+
+time.sleep(1)
+
+show_static_image(yay, screen, is_last=True)
 
 # endregion
 

@@ -4,7 +4,7 @@ import pygame
 from pygame import Surface
 
 from flo.constants.settings import fps, player_layer
-from flo.objects import Flo, Obstacle, ObstacleRight, ObstacleToStandOn
+from flo.objects import Flo, Obstacle, ObstacleRight, ObstacleToStandOn, Enemy
 
 
 class LayeredUpdates(pygame.sprite.LayeredUpdates):
@@ -16,7 +16,7 @@ class LayeredUpdates(pygame.sprite.LayeredUpdates):
 
 
 class LevelBase(ABC):
-    _is_development = True
+    _is_development = False
 
     def __init__(
         self, sprites: LayeredUpdates, screen: Surface, flo_x: int, flo_y: int, floor: int
@@ -24,7 +24,8 @@ class LevelBase(ABC):
         self.sprites = sprites
         self._screen = screen
 
-        self.flo = Flo(flo_x, flo_y, floor)
+        self.floor = floor
+        self.flo = Flo(flo_x, flo_y, self.floor)
         self.sprites.add(self.flo, layer=player_layer)
         self._clock = pygame.time.Clock()
 
@@ -71,6 +72,12 @@ class LevelBase(ABC):
                             (0, 255, 0),
                             sprite.rect,
                         )
+                    if isinstance(sprite, Enemy):
+                        pygame.draw.rect(
+                            self._screen,
+                            (0, 255, 0),
+                            sprite.core,
+                        )
 
             pygame.display.flip()
             self._clock.tick(fps)
@@ -78,8 +85,8 @@ class LevelBase(ABC):
             if self.is_level_finished():
                 running = False
 
-        self.sprites.empty()
+        # self.sprites.empty()
 
     @abstractmethod
-    def is_level_finished(self, *args, **kwargs):
+    def is_level_finished(self):
         raise NotImplementedError()
