@@ -11,13 +11,17 @@ from ._trivial import Obstacle, ObstacleToStandOn
 
 class CannotGoThroughObstacles(CanCollide, ABC):
 
-    chair_monitor = Rect(585, 800 - 200 - table_height + floor_pad + 5, 230, 1)
+    chair_monitor = Rect(585, 502, 230, 1)
 
     def _collision_with_object(self, obj: GameObject):
         match obj:
-            case Obstacle() | ObstacleToStandOn() as obstacle:
-                if self._is_on_the_chair():
-                    self._horizontal_collision_with_obstacle(obstacle)
+            case Obstacle() as obstacle:
+                self._horizontal_collision_with_obstacle(obstacle)
+            case ObstacleToStandOn() as obstacle:
+                pass
+                # TODO this needs to take level into account somehow
+                # if self._is_on_the_chair():
+                #     self._horizontal_collision_with_obstacle(obstacle)
             case _:
                 pass
 

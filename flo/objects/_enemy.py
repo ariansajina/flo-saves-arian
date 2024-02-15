@@ -1,10 +1,11 @@
-from flo.base import GameObjectWithDirection
-from flo.constants.physics import Direction
-from flo.graphics import enemy_image
-from flo.mechanics import CanCollide, CanMoveHorizontally, CannotExitScreen
-from flo.universe import Environment, GameAtom
+import math
 
-from . import ObstacleToStandOn
+import pygame
+
+from flo.base import GameObjectWithDirection, GameObject
+from flo.mechanics import CanCollide, CanMoveHorizontally, CannotExitScreen
+
+from ._trivial import ObstacleToStandOn
 from ._flower import Flower
 
 
@@ -17,58 +18,43 @@ class Enemy(
     _gait_speed = 2
 
     def __init__(self, x: int, y: int):
-        super().__init__(enemy_image.convert_alpha(), x, y)
+        super().__init__("evil_smoke.png", x, y)
         self.health = 100
+        self.is_hurt = False
+        self.hurt_timer = 0
+        self._x_prior_hurt = x
+        self._y_prior_hurt = y
 
     @property
     def speed(self) -> int:
         return self._gait_speed
 
-    def tick(self, environment: Environment) -> None:
-        if self.direction is Direction.right:
-            self.move_right()
-        else:
-            self.move_left()
+    def update(self, environment: list[GameObject]) -> None:
+        self._hurt()
         self.collisions(environment)
         self.bound()
 
-    def _collision_with_object(self, game_atom: GameAtom):
-        match game_atom:
-            case ObstacleToStandOn() as obstacle:
-                self._collision_with_obstacle(obstacle)
+    def _hurt(self):
+        if self.is_hurt:
+            self.rect.x += 4 * math.sin(pygame.time.get_ticks() * 0.1)
+            self.hurt_timer -= 1
+            if self.hurt_timer <= 0:
+                self.is_hurt = False
+                self.rect.x = self._x_prior_hurt
+                self. rect.y = self._y_prior_hurt
+
+    def _collision_with_object(self, obj: GameObject):
+        match obj:
             case Flower() as flower:
-                flower.perish()
-                self.health -= 25
+                flower.kill()
+
+                self.is_hurt = True
+                self.hurt_timer = 10
+                self.health -= 20
+                self._x_prior_hurt = self.rect.x
+                self._y_prior_hurt = self.rect.y
+
                 if self.health <= 0:
-                    self.perish()
+                    self.kill()
             case _:
                 pass
-
-    # TODO refactor
-    def _collision_with_obstacle(self, obstacle: ObstacleToStandOn):
-        # Determine the center point of the entity and the obstacle
-        entity_center = self.rect.center
-        obstacle_center = obstacle.rect.center
-
-        # Calculate the difference in x and y coordinates
-        dx = entity_center[0] - obstacle_center[0]
-        dy = entity_center[1] - obstacle_center[1]
-
-        # Calculate the overlap in x and y dimensions
-        overlap_x = self.rect.width / 2 + obstacle.rect.width / 2 - abs(dx)
-        overlap_y = self.rect.height / 2 + obstacle.rect.height / 2 - abs(dy)
-
-        # Resolve the collision based on the minimum overlap
-        if overlap_x < overlap_y:
-            # Horizontal collision
-            if dx > 0:
-                # Entity is to the right of the obstacle, push it right
-                self.rect.left = obstacle.rect.right
-            else:
-                # Entity is to the left of the obstacle, push it left
-                self.rect.right = obstacle.rect.left
-        # # Vertical collision
-        elif dy > 0:
-            # Entity is below the obstacle, push it down
-            self.rect.top = obstacle.rect.bottom
-            self.y_velocity = 0

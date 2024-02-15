@@ -32,6 +32,7 @@ class CanJump(GameObject, ABC):
                 self._stand()
 
         # Check for reaching the bottom of the screen
+        # TODO table_height should be refactored into something that works for both levels
         floor = screen_height - self.rect.height - table_height + floor_pad
         if self.rect.top >= floor:
             self.rect.top = floor

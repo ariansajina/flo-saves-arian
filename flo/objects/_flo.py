@@ -17,7 +17,7 @@ class Flo(
     _gait_speed = 5
 
     def __init__(self, x: int, y: int):
-        super().__init__("floV1.png", x, y)
+        super().__init__("flo.png", x, y)
 
     def update(self, environment: list[GameObject]) -> None:
         self.collisions(environment)
