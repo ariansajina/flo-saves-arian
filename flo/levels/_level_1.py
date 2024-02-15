@@ -19,3 +19,6 @@ class Level1(LevelBase):
 
     def is_level_finished(self):
         return self.flo.rect.colliderect(self._goal.rect)
+
+    def enemy_action(self):
+        return

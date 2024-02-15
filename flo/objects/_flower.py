@@ -21,3 +21,22 @@ class Flower(
     @property
     def speed(self) -> int:
         return self._direction.value * self._flower_speed
+
+
+class Smoke(
+    CanMoveHorizontally,
+    CanExitScreen,
+    GameObject,
+):
+    _speed = 6
+
+    def __init__(self, x: int, y: int):
+        super().__init__("smoke_bullet.png", x, y)
+
+    def update(self, environment: list[GameObject]) -> None:
+        self.move_left()
+        self.bound()
+
+    @property
+    def speed(self) -> int:
+        return self._speed

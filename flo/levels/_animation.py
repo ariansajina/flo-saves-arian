@@ -54,6 +54,7 @@ class AnimationFloComesDown(AnimationBase):
         self.flo = flo
 
     def animate(self) -> None:
+        self.flo.turn_right()
         self.flo.move_right()
 
     def is_finished(self) -> bool:

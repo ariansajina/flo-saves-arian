@@ -1,9 +1,9 @@
+import random
+
 from pygame import Surface
 
-from flo.base import GameObject
-
-from ..constants.settings import player_layer
-from ..objects import Enemy
+from flo.constants.settings import player_layer
+from flo.objects import Enemy
 from ._base import LayeredUpdates, LevelBase
 
 
@@ -21,3 +21,8 @@ class Level2(LevelBase):
 
     def is_level_finished(self):
         return not self.enemy.alive
+
+    def enemy_action(self):
+        if random.uniform(0, 1) < self.enemy.chance_of_shooting_smoke:
+            smoke = self.enemy.shoot_smoke()
+            self.sprites.add(smoke, layer=player_layer)

@@ -1,4 +1,5 @@
 import math
+import random
 
 import pygame
 from pygame import Rect
@@ -6,7 +7,7 @@ from pygame import Rect
 from flo.base import GameObject
 from flo.mechanics import CanCollide, CanMoveHorizontally, CannotExitScreen
 
-from ._flower import Flower
+from ._flower import Flower, Smoke
 
 
 class Enemy(
@@ -14,7 +15,8 @@ class Enemy(
     CanCollide,
 ):
     _gait_speed = 2
-    _flower_damage = 20
+    _flower_damage = 5
+    chance_of_shooting_smoke = 0.025
 
     def __init__(self, x: int, y: int):
         super().__init__("evil_smoke.png", x, y)
@@ -65,3 +67,11 @@ class Enemy(
                         self.alive = False
             case _:
                 pass
+
+    def shoot_smoke(self) -> Smoke:
+        x, y = self.rect.x, self.rect.y
+        height = random.randint(self.rect.height // 5, self.rect.height)
+        return Smoke(
+            x,
+            y + height,
+        )

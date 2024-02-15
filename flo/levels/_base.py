@@ -1,3 +1,4 @@
+import random
 from abc import ABC, abstractmethod
 
 import pygame
@@ -60,6 +61,8 @@ class LevelBase(ABC):
                 self.sprites.add(flower, layer=player_layer)
             space_pressed_last_frame = space_currently_pressed
 
+            self.enemy_action()
+
             self.sprites.update()
 
             self.sprites.draw(self._screen)
@@ -94,4 +97,8 @@ class LevelBase(ABC):
 
     @abstractmethod
     def is_level_finished(self):
+        raise NotImplementedError()
+
+    @abstractmethod
+    def enemy_action(self):
         raise NotImplementedError()
