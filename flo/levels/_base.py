@@ -3,7 +3,6 @@ from abc import abstractmethod, ABC
 import pygame
 from pygame import Surface
 
-from flo.constants.colors import white
 from flo.constants.settings import player_layer, fps
 from flo.objects import Flo, Obstacle, ObstacleToStandOn
 
@@ -62,7 +61,7 @@ class LevelBase(ABC):
             if self._is_development:
                 font = pygame.font.Font(None, 36)
                 text_surface = font.render(
-                    f"# objects: {len(self.sprites.sprites())}", True, white
+                    f"# objects: {len(self.sprites.sprites())}", True, (255, 255, 255)
                 )
                 self._screen.blit(text_surface, (10, 10))
                 for sprite in self.sprites.sprites():

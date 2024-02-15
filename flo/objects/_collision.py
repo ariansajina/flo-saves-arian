@@ -3,7 +3,6 @@ from abc import ABC
 from pygame import Rect
 
 from flo.base import GameObject
-from flo.constants.settings import floor_pad, table_height
 from flo.mechanics import CanCollide
 
 from ._trivial import Obstacle, ObstacleToStandOn
@@ -18,10 +17,8 @@ class CannotGoThroughObstacles(CanCollide, ABC):
             case Obstacle() as obstacle:
                 self._horizontal_collision_with_obstacle(obstacle)
             case ObstacleToStandOn() as obstacle:
-                pass
-                # TODO this needs to take level into account somehow
-                # if self._is_on_the_chair():
-                #     self._horizontal_collision_with_obstacle(obstacle)
+                if self._is_on_the_chair():
+                    self._horizontal_collision_with_obstacle(obstacle)
             case _:
                 pass
 

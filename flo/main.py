@@ -60,11 +60,6 @@ chair_mask_3 = ObstacleToStandOn(
     823,
     screen_height - chair_img.get_height() - table_height + floor_pad + 5,
 )
-chair_mask_4 = Obstacle(
-    "masks/mask-230x1.png",
-    585,
-    800 - 200 - table_height + floor_pad + 5,
-)
 
 
 bottle_img = pygame.image.load(images / "bottle.png").convert_alpha()
@@ -102,7 +97,6 @@ level_1_sprites.add(
         chair_mask_1,
         chair_mask_2,
         chair_mask_3,
-        chair_mask_4,
         bottle,
         bottle_mask_1,
         bottle_mask_2,
