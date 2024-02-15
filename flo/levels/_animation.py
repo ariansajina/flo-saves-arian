@@ -1,11 +1,11 @@
-from abc import abstractmethod, ABC
+from abc import ABC, abstractmethod
 
 import pygame
 from pygame import Surface
 
 from flo.constants.settings import fps, player_layer
 from flo.levels import LayeredUpdates
-from flo.objects import Enemy, Flo, Arian
+from flo.objects import Arian, Enemy, Flo
 
 
 class AnimationBase(ABC):
@@ -61,9 +61,7 @@ class AnimationFloComesDown(AnimationBase):
 
 
 class AnimationArianComesIn(AnimationBase):
-    def __init__(
-        self, sprites: LayeredUpdates, screen: Surface, flo: Flo
-    ):
+    def __init__(self, sprites: LayeredUpdates, screen: Surface, flo: Flo):
         super().__init__(sprites, screen)
         self.flo = flo
         self.arian = Arian(1200, flo.floor)

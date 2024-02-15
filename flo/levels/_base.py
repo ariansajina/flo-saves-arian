@@ -4,7 +4,7 @@ import pygame
 from pygame import Surface
 
 from flo.constants.settings import fps, player_layer
-from flo.objects import Flo, Obstacle, ObstacleRight, ObstacleToStandOn, Enemy
+from flo.objects import Enemy, Flo, Obstacle, ObstacleRight, ObstacleToStandOn
 
 
 class LayeredUpdates(pygame.sprite.LayeredUpdates):
@@ -19,7 +19,12 @@ class LevelBase(ABC):
     _is_development = False
 
     def __init__(
-        self, sprites: LayeredUpdates, screen: Surface, flo_x: int, flo_y: int, floor: int
+        self,
+        sprites: LayeredUpdates,
+        screen: Surface,
+        flo_x: int,
+        flo_y: int,
+        floor: int,
     ):
         self.sprites = sprites
         self._screen = screen

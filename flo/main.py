@@ -4,27 +4,14 @@ from pathlib import Path
 
 import pygame
 
-from flo.constants.settings import (
-    background_layer,
-    floor_pad,
-    foreground_layer,
-    object_layer,
-    screen_height,
-    screen_width,
-    table_height,
-)
+from flo.constants.settings import (background_layer, floor_pad,
+                                    foreground_layer, object_layer,
+                                    screen_height, screen_width, table_height)
 from flo.levels import LayeredUpdates, Level1, Level2, show_static_image
-from flo.levels._animation import (
-    AnimationEvilSmokeDies,
-    AnimationFloComesDown,
-    AnimationArianComesIn,
-)
-from flo.objects import (
-    Obstacle,
-    ObstacleRight,
-    ObstacleToStandOn,
-    Scenery,
-)
+from flo.levels._animation import (AnimationArianComesIn,
+                                   AnimationEvilSmokeDies,
+                                   AnimationFloComesDown)
+from flo.objects import Obstacle, ObstacleRight, ObstacleToStandOn, Scenery
 
 images = Path(__file__).parent.parent / "images"
 

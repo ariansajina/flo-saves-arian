@@ -2,9 +2,9 @@ from pygame import Surface
 
 from flo.base import GameObject
 
-from ._base import LayeredUpdates, LevelBase
 from ..constants.settings import player_layer
 from ..objects import Enemy
+from ._base import LayeredUpdates, LevelBase
 
 
 class Level2(LevelBase):
