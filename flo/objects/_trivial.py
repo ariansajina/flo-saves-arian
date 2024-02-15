@@ -16,3 +16,7 @@ class ObstacleToStandOn(TrivialGameObject):
 
 class Obstacle(TrivialGameObject):
     pass
+
+
+class ObstacleRight(TrivialGameObject):
+    pass

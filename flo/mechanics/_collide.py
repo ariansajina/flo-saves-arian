@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
 
-from flo.base import GameObject
+from flo.base import GameObject, GameObjectWithDirection
 
 
-class CanCollide(GameObject, ABC):
+class CanCollide(GameObjectWithDirection, ABC):
 
     def __init__(self, image: str, x: int, y: int):
         super().__init__(image, x, y)

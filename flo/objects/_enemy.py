@@ -10,7 +10,6 @@ from ._flower import Flower
 
 
 class Enemy(
-    GameObjectWithDirection,
     CanMoveHorizontally,
     CannotExitScreen,
     CanCollide,

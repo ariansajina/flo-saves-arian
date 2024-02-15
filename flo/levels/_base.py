@@ -4,7 +4,7 @@ import pygame
 from pygame import Surface
 
 from flo.constants.settings import player_layer, fps
-from flo.objects import Flo, Obstacle, ObstacleToStandOn
+from flo.objects import Flo, Obstacle, ObstacleToStandOn, ObstacleRight
 
 
 class LayeredUpdates(pygame.sprite.LayeredUpdates):
@@ -65,7 +65,7 @@ class LevelBase(ABC):
                 )
                 self._screen.blit(text_surface, (10, 10))
                 for sprite in self.sprites.sprites():
-                    if isinstance(sprite, (Obstacle, ObstacleToStandOn)):
+                    if isinstance(sprite, (Obstacle, ObstacleToStandOn, ObstacleRight)):
                         pygame.draw.rect(
                             self._screen,
                             (0, 255, 0),

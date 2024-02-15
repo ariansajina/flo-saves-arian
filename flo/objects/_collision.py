@@ -5,27 +5,23 @@ from pygame import Rect
 from flo.base import GameObject
 from flo.mechanics import CanCollide
 
-from ._trivial import Obstacle, ObstacleToStandOn
+from ._trivial import Obstacle, ObstacleToStandOn, ObstacleRight
+from ..constants.physics import Direction
 
 
 class CannotGoThroughObstacles(CanCollide, ABC):
 
-    chair_monitor = Rect(585, 502, 230, 1)
-
     def _collision_with_object(self, obj: GameObject):
         match obj:
+            case ObstacleRight() as obstacle:
+                if self.direction is Direction.left:
+                    self._horizontal_collision_with_obstacle(obstacle, left=False)
             case Obstacle() as obstacle:
                 self._horizontal_collision_with_obstacle(obstacle)
-            case ObstacleToStandOn() as obstacle:
-                if self._is_on_the_chair():
-                    self._horizontal_collision_with_obstacle(obstacle)
             case _:
                 pass
 
-    def _is_on_the_chair(self):
-        return self.rect.colliderect(self.chair_monitor)
-
-    def _horizontal_collision_with_obstacle(self, obstacle: Obstacle):
+    def _horizontal_collision_with_obstacle(self, obstacle: Obstacle, left=True, right=True):
         # Determine the center point of the entity and the obstacle
         entity_center = self.rect.center
         obstacle_center = obstacle.rect.center
@@ -41,10 +37,10 @@ class CannotGoThroughObstacles(CanCollide, ABC):
         # Resolve the collision based on the minimum overlap
         if overlap_x < overlap_y:
             # Horizontal collision
-            if dx > 0:
+            if dx > 0 and right:
                 # Entity is to the right of the obstacle, push it right
                 self.rect.left = obstacle.rect.right
-            else:
+            elif dx < 0 and left:
                 # Entity is to the left of the obstacle, push it left
                 self.rect.right = obstacle.rect.left
 

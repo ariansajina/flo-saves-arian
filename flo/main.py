@@ -14,7 +14,7 @@ from flo.constants.settings import (
     player_layer,
 )
 from flo.levels import LayeredUpdates, Level1, Level2, show_static_image
-from flo.objects import Obstacle, ObstacleToStandOn, Scenery, Enemy
+from flo.objects import Obstacle, ObstacleToStandOn, Scenery, Enemy, ObstacleRight
 
 images = Path(__file__).parent.parent / "images"
 
@@ -52,13 +52,23 @@ chair_mask_1 = ObstacleToStandOn(
 )
 chair_mask_2 = ObstacleToStandOn(
     "masks/mask-230x1.png",
-    585,
+    590,
     screen_height - chair_img.get_height() - table_height + floor_pad + 35,
 )
 chair_mask_3 = ObstacleToStandOn(
     "masks/mask-25x1.png",
     823,
     screen_height - chair_img.get_height() - table_height + floor_pad + 5,
+)
+chair_mask_4 = ObstacleRight(
+    "masks/mask-1x5.png",
+    570,
+    510,
+)
+chair_mask_5 = Obstacle(
+    "masks/mask-1x5.png",
+    825,
+    510,
 )
 
 
@@ -97,6 +107,8 @@ level_1_sprites.add(
         chair_mask_1,
         chair_mask_2,
         chair_mask_3,
+        chair_mask_4,
+        chair_mask_5,
         bottle,
         bottle_mask_1,
         bottle_mask_2,
@@ -178,7 +190,7 @@ level_1.run()
 
 # show_static_image(senor_p, screen)
 
-level_2.run()
+# level_2.run()
 
 # show_static_image(yay, screen, is_last=True)
 

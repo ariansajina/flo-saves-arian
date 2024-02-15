@@ -8,7 +8,6 @@ from ._trivial import ObstacleToStandOn
 
 
 class Flo(
-    GameObjectWithDirection,
     CanMoveHorizontally,
     CannotExitScreen,
     CanJump,
