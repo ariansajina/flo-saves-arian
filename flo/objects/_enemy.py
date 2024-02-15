@@ -52,21 +52,17 @@ class Enemy(
                 self.rect.y = self._y_prior_hurt
 
     def _collision_with_object(self, obj: GameObject):
-        match obj:
-            case Flower() as flower:
-                if self.core.colliderect(flower.rect):
-                    flower.kill()
-
-                    self.is_hurt = True
-                    self.hurt_timer = 10
-                    self.health -= self._flower_damage
-                    self._x_prior_hurt = self.rect.x
-                    self._y_prior_hurt = self.rect.y
-
-                    if self.health <= 0:
-                        self.alive = False
-            case _:
-                pass
+        if isinstance(obj, Flower) and self.core.colliderect(obj.rect):
+            obj.kill()
+            self.is_hurt = True
+            self.hurt_timer = 10
+            self.health -= self._flower_damage
+            self._x_prior_hurt = self.rect.x
+            self._y_prior_hurt = self.rect.y
+            if self.health <= 0:
+                self.alive = False
+        else:
+            pass
 
     def shoot_smoke(self) -> Smoke:
         x, y = self.rect.x, self.rect.y
