@@ -3,9 +3,9 @@ import random
 from typing import List
 
 import pygame
-from pygame import Rect
+from pygame import Rect, Surface
 
-from flo.base import GameObject
+from flo.base import GameObject, images
 from flo.mechanics import CanCollide, CanMoveHorizontally, CannotExitScreen
 
 from ._flower import Flower, Smoke
@@ -21,6 +21,9 @@ class Enemy(
 
     def __init__(self, x: int, y: int):
         super().__init__("evil_smoke.png", x, y)
+        self._image_alive = super().image
+        self._image_dead = pygame.image.load(images / "evil_smoke_dead.png").convert_alpha()
+
         self.health = 100
         self.is_hurt = False
         self.hurt_timer = 0
@@ -64,6 +67,12 @@ class Enemy(
                 self.alive = False
         else:
             pass
+
+    @property
+    def image(self) -> Surface:
+        if self.alive:
+            return self._image_alive
+        return self._image_dead
 
     def shoot_smoke(self) -> Smoke:
         x, y = self.rect.x, self.rect.y
