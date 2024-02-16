@@ -33,7 +33,7 @@ class Smoke(
     _speed = 6
 
     def __init__(self, x: int, y: int):
-        super().__init__("smoke_bullet.png", x, y)
+        super().__init__("small_smoke.png", x, y)
 
     def update(self, environment: List[GameObject]) -> None:
         self.move_left()

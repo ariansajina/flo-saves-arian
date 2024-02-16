@@ -7,6 +7,7 @@ from pygame import Surface
 def show_static_image(image: Surface, screen, is_last=False):
     screen.blit(image, (0, 0))  # Draw the image on the screen
     pygame.display.flip()  # Update the display
+    space_pressed_last_frame = True
 
     # Wait for the player to press space
     waiting = True
@@ -15,6 +16,11 @@ def show_static_image(image: Surface, screen, is_last=False):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == pygame.KEYDOWN and not is_last:
+            if (
+                event.type == pygame.KEYDOWN
+                and not space_pressed_last_frame
+                and not is_last
+            ):
                 if event.key == pygame.K_SPACE:
                     waiting = False
+        space_pressed_last_frame = False

@@ -201,7 +201,7 @@ animation_2.run()
 animation_3 = AnimationArianComesIn(level_2_sprites, screen, level_2.flo)
 animation_3.run()
 
-time.sleep(1)
+time.sleep(.3)
 
 show_static_image(you_alive, screen)
 show_static_image(pinas, screen)
