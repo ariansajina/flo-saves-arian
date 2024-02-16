@@ -8,7 +8,6 @@ from ._trivial import Obstacle, ObstacleRight
 
 
 class CannotGoThroughObstacles(CanCollide, ABC):
-
     def _collision_with_object(self, obj: GameObject):
         if isinstance(obj, ObstacleRight):
             if self.direction is Direction.left:

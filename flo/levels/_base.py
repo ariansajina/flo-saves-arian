@@ -1,4 +1,3 @@
-import random
 from abc import ABC, abstractmethod
 
 import pygame
@@ -9,7 +8,7 @@ from flo.objects import Enemy, Flo, Obstacle, ObstacleRight, ObstacleToStandOn
 
 
 class LayeredUpdates(pygame.sprite.LayeredUpdates):
-    def update(self, *args, **kwargs):
+    def update(self):
         sprites = set(self.sprites())
         for _sprite in self.sprites():
             other_sprites = sprites.difference([_sprite])

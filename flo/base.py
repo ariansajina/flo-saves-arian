@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Optional, Self
+from typing import List, Optional
 
 import pygame.sprite
 from pygame import Mask, Rect, Surface
@@ -32,7 +32,7 @@ class GameObject(pygame.sprite.Sprite, ABC):
         return self._mask
 
     @abstractmethod
-    def update(self, environment: list[Self]):
+    def update(self, environment: List["GameObject"]):
         raise NotImplementedError()
 
 

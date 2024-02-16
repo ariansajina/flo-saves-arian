@@ -1,4 +1,4 @@
-from typing import Self
+from typing import List
 
 from flo.base import GameObject, GameObjectWithDirection
 from flo.constants.physics import Direction
@@ -21,7 +21,7 @@ class Flo(
         super().__init__("flo.png", x, y)
         self._floor = floor
 
-    def update(self, environment: list[GameObject]) -> None:
+    def update(self, environment: List[GameObject]) -> None:
         self.collisions(environment)
         self.fall(environment)
         self.bound()
@@ -58,5 +58,5 @@ class Arian(GameObjectWithDirection, CanMoveHorizontally):
     def speed(self) -> int:
         return 4
 
-    def update(self, environment: list[Self]):
+    def update(self, environment: List[GameObject]):
         return

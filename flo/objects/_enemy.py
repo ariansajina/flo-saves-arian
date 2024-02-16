@@ -1,5 +1,6 @@
 import math
 import random
+from typing import List
 
 import pygame
 from pygame import Rect
@@ -38,7 +39,7 @@ class Enemy(
     def speed(self) -> int:
         return self._gait_speed
 
-    def update(self, environment: list[GameObject]) -> None:
+    def update(self, environment: List[GameObject]) -> None:
         self._hurt()
         self.collisions(environment)
 

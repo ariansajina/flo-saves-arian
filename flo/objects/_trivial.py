@@ -1,8 +1,10 @@
+from typing import List
+
 from flo.base import GameObject
 
 
 class TrivialGameObject(GameObject):
-    def update(self, environment: list[GameObject]):
+    def update(self, environment: List[GameObject]):
         return
 
 

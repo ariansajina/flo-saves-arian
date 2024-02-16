@@ -1,3 +1,5 @@
+from typing import List
+
 from flo.base import GameObject
 from flo.constants.physics import Direction
 from flo.mechanics import CanExitScreen, CanMoveHorizontally
@@ -14,7 +16,7 @@ class Flower(
         super().__init__("flower.png", x, y)
         self._direction = direction
 
-    def update(self, environment: list[GameObject]) -> None:
+    def update(self, environment: List[GameObject]) -> None:
         self.move_right()
         self.bound()
 
@@ -33,7 +35,7 @@ class Smoke(
     def __init__(self, x: int, y: int):
         super().__init__("smoke_bullet.png", x, y)
 
-    def update(self, environment: list[GameObject]) -> None:
+    def update(self, environment: List[GameObject]) -> None:
         self.move_left()
         self.bound()
 

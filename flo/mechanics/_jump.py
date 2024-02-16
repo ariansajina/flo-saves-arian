@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
+from typing import List
 
 from flo.base import GameObject
 from flo.constants.physics import GRAVITY, JUMP_HEIGHT
 
 
 class CanJump(GameObject, ABC):
-
     def __init__(self, image: str, x: int, y: int):
         super().__init__(image, x, y)
         self._is_on_ground = True
@@ -16,7 +16,7 @@ class CanJump(GameObject, ABC):
             self.y_velocity = JUMP_HEIGHT
             self._is_on_ground = False
 
-    def fall(self, environment: list[GameObject]):
+    def fall(self, environment: List[GameObject]):
         if not self._is_on_ground:
             self.rect.top += self.y_velocity
             self.y_velocity += GRAVITY
