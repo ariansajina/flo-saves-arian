@@ -160,11 +160,14 @@ level_2_sprites.add(
 
 # endregion
 
-
+title = pygame.image.load(images / "title.jpg").convert_alpha()
 tiramisu = pygame.image.load(images / "tiramisu.jpg").convert_alpha()
 senor_p = pygame.image.load(images / "senor_p.jpg").convert_alpha()
-yay = pygame.image.load(images / "yay.jpg").convert_alpha()
 
+you_alive = pygame.image.load(images / "you_alive.jpg").convert_alpha()
+pinas = pygame.image.load(images / "pinas.jpg").convert_alpha()
+gots_question = pygame.image.load(images / "gots_question.jpg").convert_alpha()
+how_you_doin = pygame.image.load(images / "how_you_doin.jpg").convert_alpha()
 
 level_1 = Level1(
     level_1_sprites,
@@ -178,27 +181,33 @@ level_2 = Level2(level_2_sprites, screen, 100, 900)
 
 # region: order of game elements
 
-# show_static_image(tiramisu, screen)
+show_static_image(title, screen)
+
+show_static_image(tiramisu, screen)
 
 level_1.run()
 
 show_static_image(senor_p, screen)
 
 level_2.run()
-#
-# animation_1 = AnimationEvilSmokeDies(level_2_sprites, screen, level_2.enemy)
-# animation_1.run()
-#
-# animation_2 = AnimationFloComesDown(level_2_sprites, screen, level_2.flo)
-# animation_2.run()
-#
-#
-# animation_3 = AnimationArianComesIn(level_2_sprites, screen, level_2.flo)
-# animation_3.run()
-#
-# time.sleep(1)
-#
-# show_static_image(yay, screen, is_last=True)
+
+animation_1 = AnimationEvilSmokeDies(level_2_sprites, screen, level_2.enemy)
+animation_1.run()
+
+animation_2 = AnimationFloComesDown(level_2_sprites, screen, level_2.flo)
+animation_2.run()
+
+
+animation_3 = AnimationArianComesIn(level_2_sprites, screen, level_2.flo)
+animation_3.run()
+
+time.sleep(1)
+
+show_static_image(you_alive, screen)
+show_static_image(pinas, screen)
+show_static_image(gots_question, screen)
+show_static_image(how_you_doin, screen, is_last=True)
+
 
 # endregion
 
