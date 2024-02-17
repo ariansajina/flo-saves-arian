@@ -50,7 +50,7 @@ chair_mask_1 = ObstacleToStandOn(
 chair_mask_2 = ObstacleToStandOn(
     "masks/mask-230x1.png",
     590,
-    screen_height - chair_img.get_height() - table_height + floor_pad + 35,
+    screen_height - chair_img.get_height() - table_height + floor_pad + 40,
 )
 chair_mask_3 = ObstacleToStandOn(
     "masks/mask-15x1.png",
